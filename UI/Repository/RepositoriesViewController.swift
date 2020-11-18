@@ -114,7 +114,8 @@ class RepositoriesViewController: UIViewController, RepositoriesView {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: centerXAnchorConstant),
             label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: centerYAnchorConstant),
-            label.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.96, constant: 0)
+            label.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: 8),
+            label.trailingAnchor.constraint(greaterThanOrEqualTo: self.view.trailingAnchor, constant: 8)
         ])
     }
 
