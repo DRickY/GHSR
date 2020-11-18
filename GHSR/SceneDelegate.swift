@@ -16,8 +16,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         self.window = window
-        window.rootViewController = RepositoriesViewController()
+        window.rootViewController = self.configureVC()
         window.makeKeyAndVisible()
+    }
+    
+    func configureVC() -> RepositoriesViewController {
+        let host = Config.apiEndpoint
+        let apiClient: ApiClient = ApiClientImpl.defaultInstance(host: host)
+        let gateway: SearchRepositoriesGateway = ApiSearchRepositoriesGatewayImpl(apiClient)
+
+        let paginator: RepositoriesPagination = RepositoriesPaginationImp(searchGateway: gateway)
+//        RepositoriesPagination
+        let vc = RepositoriesViewController()
+        let presenter = RepositoryPresenter(vc, paginator)
+        presenter.start()
+        vc.deallocator = Deallocator({ presenter })
+        
+        return vc
     }
 }
 
