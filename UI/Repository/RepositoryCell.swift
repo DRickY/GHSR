@@ -8,25 +8,45 @@
 import UIKit
 import SwiftUI
 
+//let id: Int
+//let title: String
+//let stars: Int
+
+
+extension RepositoryCell {
+    struct Props {
+        let id : Id; struct Id {
+            let value: String
+        }
+        
+        let title: String
+        let stars: Int
+    }
+}
+
 class RepositoryCell: UITableViewCell {
     
-    lazy var titleLabel = UILabel()
-    lazy var countLabel = UILabel()
-//    @IBOutlet weak var titleLabel: UILabel!
-//    @IBOutlet weak var countLabel: UILabel!
+    private lazy var titleLabel = UILabel()
+
+    private lazy var countLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupViews()
     }
     
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setupViews()
     }
     
-    func setupViews() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.titleLabel.text = nil
+        self.countLabel.text = nil
+    }
+    
+    private func setupViews() {
         let content = self.contentView
         
         let stack = UIStackView()
@@ -36,29 +56,34 @@ class RepositoryCell: UITableViewCell {
         stack.alignment = .leading
         stack.distribution = .fillProportionally
         content.addSubview(stack)
-
+        
+        let titleLabel = self.titleLabel
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
         titleLabel.font = .systemFont(ofSize: 16)
         
+        let countLabel = self.countLabel
         countLabel.translatesAutoresizingMaskIntoConstraints = false
         countLabel.font = .systemFont(ofSize: 14)
         countLabel.textColor = .darkGray
         
         [titleLabel, countLabel].forEach(stack.addArrangedSubview)
         
+        let topButtomPadding: CGFloat = 8
+        let leftRightPadding: CGFloat = 4
+        
         NSLayoutConstraint.activate([
-            content.topAnchor.constraint(equalTo: stack.topAnchor, constant: -8),
-            content.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: -4),
-            content.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: -4),
-            content.bottomAnchor.constraint(greaterThanOrEqualTo: stack.bottomAnchor, constant: 8)
+            content.topAnchor.constraint(equalTo: stack.topAnchor, constant: -topButtomPadding),
+            content.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: -leftRightPadding),
+            content.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: -leftRightPadding),
+            content.bottomAnchor.constraint(greaterThanOrEqualTo: stack.bottomAnchor, constant: topButtomPadding)
         ])
     }
     
-    func fill(text: String, description: String) {
-        titleLabel.text = text
+    func fill(props: RepositoryCell.Props) {
+        self.titleLabel.text = props.title
+        self.countLabel.text = props.stars.description
         
-        countLabel.text = description
         self.layoutIfNeeded()
     }
 }
