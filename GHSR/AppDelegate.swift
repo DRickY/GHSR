@@ -10,10 +10,31 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //        ApiEndpoint.baseEndpoint = ApiEndpoint(host: )
+//        let client = ApiClientImpl.defaultInstance(host: Config.apiEndpoint)
+//        client.responseHandlersQueue.append(JsonResponseHandler())
+//        client.responseHandlersQueue.append(ErrorResponseHandler())
+//        let api = ApiSearchRepositoriesGatewayImpl.init(client)
+        
+//        let g = RepositoriesPaginationImp(searchGateway: api)
+        
+//        self.g = g
+        
+//        g.loadNewData(searchBy: "swift") { (result) in
+//            result.map {
+//                print("OBSERVER IS PRINTER1  \($0.count)")
+//                $0.forEach { v in
+//                    print("ids \(v.id)")
+//                }
+//
+//
+//
+//            }
+//        }
+        
+        
+
         return true
     }
 
