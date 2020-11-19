@@ -22,6 +22,7 @@ class ConcurrencyRequests {
 
         for _ in 0..<self.maxConcurrentOperationCount {
             self.group.enter()
+            
             self.blocks.mutate { $0.append({ self.group.leave() }) }
             
             self.workerQueue.async(group: group) { [weak self] in

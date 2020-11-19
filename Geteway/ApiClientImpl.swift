@@ -50,7 +50,7 @@ class ApiClientImpl: ApiClient {
             }
             
             if !isHandled {
-                let errorEntity = ResponseErrorEntity(response)
+                var errorEntity = ResponseErrorEntity(response)
                 errorEntity.errors.append(
                         "Internal application error: server response handler not found")
                 callback(.failure(errorEntity))

@@ -31,7 +31,6 @@ class RepositoriesPaginationImp: RepositoriesPagination {
     public var isLoadingInProcess: Bool = false
 
     private let searchGateway: SearchRepositoriesGateway
-    private var productsInProgressIds = [Int]()
 
     private var currentPage = Atomic<Int>(0)
     private var totalItemsCount: Int?
@@ -114,7 +113,6 @@ class RepositoriesPaginationImp: RepositoriesPagination {
 
     public func reset() {
         self.items.removeAll()
-        self.productsInProgressIds.removeAll()
         self.totalItemsCount = nil
         self.currentPage = Atomic(0)
         self.countItemsLastLoadedPage = 0
