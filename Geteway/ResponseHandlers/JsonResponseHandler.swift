@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class JsonResponseHandler: ResponseHandler {
+public struct JsonResponseHandler: ResponseHandler {
     
     private let decoder = JSONDecoder()
     
@@ -26,7 +26,7 @@ public class JsonResponseHandler: ResponseHandler {
                     observer(.success(result))
                 }
             } catch {
-                let err = ResponseErrorEntity()
+                var err = ResponseErrorEntity()
                 err.errors.append(error.localizedDescription)
                 observer(.failure(err))
             }

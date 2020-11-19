@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class ErrorResponseHandler: ResponseHandler {
+struct ErrorResponseHandler: ResponseHandler {
     
     private let jsonDecoder = JSONDecoder()
     
@@ -19,7 +19,7 @@ open class ErrorResponseHandler: ResponseHandler {
            let nsHttpUrlResponse = urlResponse as? HTTPURLResponse,
            (300..<600).contains(nsHttpUrlResponse.statusCode) {
             
-            let errorEntity = ResponseErrorEntity(response.urlResponse)
+            var errorEntity = ResponseErrorEntity(response.urlResponse)
             
             errorEntity.errors.append("|| \(nsHttpUrlResponse.statusCode) ||\n")
             

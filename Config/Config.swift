@@ -7,6 +7,6 @@
 
 import Foundation
 
-class Config {
+struct Config {
     static var apiEndpoint = "https://api.github.com"
 }

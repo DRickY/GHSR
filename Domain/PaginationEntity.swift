@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PaginationEntity<T: Codable>: Codable {
+public struct PaginationEntity<T: Codable>: Codable {
     var totalItems: Int
 //    var itemsPerPage: Int { 0 }
 //    var countOfPages: Int {  }

@@ -111,11 +111,12 @@ class RepositoriesViewController: UIViewController, RepositoriesView {
         label.numberOfLines = 0
         label.textAlignment = .center
             
+        let padding: CGFloat = 8
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: centerXAnchorConstant),
             label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: centerYAnchorConstant),
-            label.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(greaterThanOrEqualTo: self.view.trailingAnchor, constant: 8)
+            label.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: padding),
+            label.trailingAnchor.constraint(greaterThanOrEqualTo: self.view.trailingAnchor, constant: -padding)
         ])
     }
 

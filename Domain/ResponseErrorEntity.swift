@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ResponseErrorEntity: Error, LocalizedError {
+public struct ResponseErrorEntity: Error, LocalizedError {
     
     public var errors = [String]()
     
