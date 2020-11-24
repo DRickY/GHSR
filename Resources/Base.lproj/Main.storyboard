@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="xTX-C4-Dly">
+            <objects>
+                <viewController id="wnj-QQ-5Sb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mtH-Tu-gbE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please do auth logic in app" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UA4-6p-Y6J">
+                                <rect key="frame" x="45.5" y="388.5" width="323.5" height="119.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ue7-zg-poV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UA4-6p-Y6J" firstAttribute="centerY" secondItem="mtH-Tu-gbE" secondAttribute="centerY" id="FqY-Oo-HBb"/>
+                            <constraint firstItem="UA4-6p-Y6J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ue7-zg-poV" secondAttribute="leading" constant="20" id="LGB-63-L15"/>
+                            <constraint firstItem="ue7-zg-poV" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UA4-6p-Y6J" secondAttribute="trailing" constant="25" id="ZLT-aZ-sI3"/>
+                            <constraint firstItem="UA4-6p-Y6J" firstAttribute="centerX" secondItem="mtH-Tu-gbE" secondAttribute="centerX" id="wNL-Bo-sKd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FVx-IU-2dR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-361" y="3"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" prompt="finc a github repo" placeholder="type search text" showsSearchResultsButton="YES" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7o-7O-EYK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="90"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xAe-Np-9PQ">
+                                <rect key="frame" x="0.0" y="134" width="405" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l7o-7O-EYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1dC-4R-gAA"/>
+                            <constraint firstItem="xAe-Np-9PQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Dbe-KI-F9f"/>
+                            <constraint firstItem="l7o-7O-EYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LLm-fa-QXU"/>
+                            <constraint firstItem="xAe-Np-9PQ" firstAttribute="top" secondItem="l7o-7O-EYK" secondAttribute="bottom" id="RZt-Ff-fIn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xAe-Np-9PQ" secondAttribute="trailing" constant="9" id="ZKn-3Y-jsG"/>
+                            <constraint firstAttribute="bottom" secondItem="xAe-Np-9PQ" secondAttribute="bottom" id="gET-nH-Pv1"/>
+                            <constraint firstItem="l7o-7O-EYK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="v01-Vu-49d"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="416" y="3"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
