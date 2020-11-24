@@ -12,7 +12,7 @@ class ConcurrencyRequests {
     private let maxConcurrentOperationCount: Int
     private let workerQueue = DispatchQueue(label: "com.ConcurrencyRequests.queue", attributes: .concurrent)
     private let group = DispatchGroup()
-    private var blocks = Atomic([() -> Void]())
+    private var blocks = Atomic(value: [() -> Void]())
 
     init(maxConcurrentOperationCount: Int) {
         self.maxConcurrentOperationCount = maxConcurrentOperationCount

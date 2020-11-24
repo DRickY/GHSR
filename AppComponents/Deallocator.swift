@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Deallocator {
+public class Deallocator {
    
     public let id: String
     private let disposable: () -> Void
@@ -23,7 +23,7 @@ class Deallocator {
 }
 
 extension Deallocator: Equatable {
-    static func == (lhs: Deallocator, rhs: Deallocator) -> Bool {
+    public static func == (lhs: Deallocator, rhs: Deallocator) -> Bool {
         return lhs === rhs
     }
 }

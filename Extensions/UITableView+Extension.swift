@@ -7,6 +7,24 @@
 
 import UIKit
 
+
+public protocol Chainable {
+    func chain<C>(_ closure: (C) -> ()) -> Self
+}
+
+public extension Chainable {
+    
+    @discardableResult
+    func chain<C>(_ closure: (C) -> ()) -> Self {
+        if case let newValue? = (self as? C) {
+            closure(newValue)
+        }
+        return self
+    }
+}
+
+extension UIView: Chainable {}
+
 public extension UITableView {
     func indexPath(for view: UIView) -> IndexPath? {
         let point = view.convert(CGPoint.zero, to: self)
@@ -16,6 +34,13 @@ public extension UITableView {
 }
 
 public extension UITableView {
+    
+    func dequeueReusableCell<T: UITableViewCell>(with cls: T.Type, at indexPath: IndexPath, configurator: (T) -> Void) -> UITableViewCell {
+        let cell = self.dequeueReusableCell(withIdentifier: toString(cls), for: indexPath)
+        
+        return cell.chain(configurator)
+    }
+    
     func dequeueReusableCell(with cls: AnyClass, at indexPath: IndexPath) -> UITableViewCell {
         return self.dequeueReusableCell(withIdentifier: toString(cls), for: indexPath)
     }

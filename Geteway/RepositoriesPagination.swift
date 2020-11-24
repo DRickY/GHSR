@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol RepositoriesPagination {
 
     var limit: Int { get set }
@@ -32,7 +31,7 @@ class RepositoriesPaginationImp: RepositoriesPagination {
 
     private let searchGateway: SearchRepositoriesGateway
 
-    private var currentPage = Atomic<Int>(0)
+    private var currentPage = Atomic<Int>(value: 0)
     private var totalItemsCount: Int?
     private var items = [RepositoryEntity]()
 
@@ -99,7 +98,6 @@ class RepositoriesPaginationImp: RepositoriesPagination {
         
         startLoading?()
         
-        
         self.currencyRequest.executeGroup({ [weak self] done in
             guard let strongSelf = self else { return }
             strongSelf.searchGateway.searchRepositories(text: text,
@@ -114,7 +112,7 @@ class RepositoriesPaginationImp: RepositoriesPagination {
     public func reset() {
         self.items.removeAll()
         self.totalItemsCount = nil
-        self.currentPage = Atomic(0)
+        self.currentPage = Atomic(value: 0)
         self.countItemsLastLoadedPage = 0
     }
 
@@ -126,7 +124,7 @@ class RepositoriesPaginationImp: RepositoriesPagination {
         
         let itemsForRemove = self.countItemsLastLoadedPage + (currentLoadedPage - page) * self.limit
         self.items.removeLast(itemsForRemove)
-        self.currentPage = Atomic(page)
+        self.currentPage = Atomic(value: page)
         
         self.observer.map { self.loadNewData(searchBy: text, startLoading: self.startLoading, observer: $0) }
     }
