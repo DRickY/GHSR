@@ -8,20 +8,19 @@
 import Foundation
 
 public protocol SearchRepositoriesGateway {
-    func searchRepositories(text: String, currentPage: Int, limit: Int, _ observer: @escaping (Result<PaginationEntity<RepositoryEntity>, ResponseErrorEntity>) -> Void)
+    func searchRepositories(text: String, page: Int, limit: Int, observer: @escaping (Result<PaginationEntity<RepositoryEntity>, ResponseErrorEntity>) -> Void)
 }
 
 public class ApiSearchRepositoriesGatewayImpl : ApiBaseGateway, SearchRepositoriesGateway {
     
     public func searchRepositories(text: String,
-                                   currentPage: Int,
+                                   page: Int,
                                    limit: Int,
-                                   _ observer: @escaping (Result<PaginationEntity<RepositoryEntity>, ResponseErrorEntity>) -> Void)
+                                   observer: @escaping (Result<PaginationEntity<RepositoryEntity>, ResponseErrorEntity>) -> Void)
     {
         let request = ExtendedApiRequest<PaginationEntity<RepositoryEntity>>.serachRepositories(searchText: text,
                                                                                                 prePage: limit,
-                                                                                                page: currentPage)
+                                                                                                page: page)
         self.apiClient.execute(request: request, observer)
     }
-    
 }
