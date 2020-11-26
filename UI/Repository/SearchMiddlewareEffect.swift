@@ -9,15 +9,15 @@ import Foundation
 
 let searchMiddleware: Middleware<AppState> = createSideEffectMiddleware { (getState, dispatch) -> Dispatch in
     return { action in
-        (action as? SearchEffect)?.handle(getState, dispatch)
+        (action as? RepositoryEffect)?.handle(getState, dispatch)
     }
 }
 
-enum SearchEffect: Action {
-    case newRequest(String)
+enum RepositoryEffect: Action {
+    case newRequest(text: String, limit: Int, page: Int)
 }
 
-extension SearchEffect {
+extension RepositoryEffect {
     
     var pagination: RepositoriesPagination {
         let host = Config.apiEndpoint
@@ -28,28 +28,41 @@ extension SearchEffect {
         return paginator
     }
     
-    func handle(_ state: @escaping GetState<AppState>, _ dispatch: @escaping Dispatch) {
-        
-        let startLoading: () -> Void = {
-            dispatch(RepositoryAction.loading)
-        }
-        
-        let observer: (Result<[RepositoryEntity], Error>) -> Void = {(result) in
-            switch result {
-            case .success(let data):
-                let action = RepositoryAction.loaded(data.sorted { $1.stars <= $0.stars })
-                dispatch(action)
+    var p: SearchRepositoriesGateway {
+        let host = Config.apiEndpoint
+        let apiClient: ApiClient = ApiClientImpl.defaultInstance(host: host)
 
-            case .failure(let error):
-                dispatch(RepositoryAction.errorWhileLoading(error.localizedDescription))
+        return ApiSearchRepositoriesGatewayImpl(apiClient)
+    }
+    
+    func handle(_ getState: @escaping GetState<AppState>, _ dispatch: @escaping Dispatch) {
+
+        guard let state = getState(), !state.repository.isLoading else {
+            NSLog("GetState No LoadNew Data")
+
+            return
+        }
+
+        dispatch(RepositoryAction.loading(isLoading: true))
+        
+        if case let .newRequest(text, lim, page) = self {
+            NSLog("LOAD NEW Batch PAGINATION at page: \(page)")
+            self.p.searchRepositories(text: text,
+                                      page: page,
+                                      limit: lim) { (result) in
+                switch result {
+                case .success(let data):
+                    print("data -")
+                    dispatch(RepositoryAction.setCurrentPage(page))
+                    dispatch(RepositoryAction.loading(isLoading: false))
+                    let action = RepositoryAction.loaded(data.items.sorted { $1.stars <= $0.stars })
+                    dispatch(action)
+
+                case .failure(let error):
+                    print("error \(error)")
+                    dispatch(RepositoryAction.errorWhileLoading(error.localizedDescription))
+                }
             }
-        }
-        
-        if case .newRequest(let text) = self {
-            self.pagination.loadNewData(searchBy: text,
-                                        startLoading: startLoading,
-                                        observer: observer)
-
         }
     }
 

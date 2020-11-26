@@ -8,9 +8,17 @@
 import UIKit
 
 extension RepositoriesViewController {
-    // MARK: - Init & Deinit
     
-    func setupSearchBar() {
+    public func activeConstraints() {
+        NSLayoutConstraint.activate(
+            self.setupSearchBar() +
+            self.setupTableView() +
+            self.setupLoadingView() +
+            self.setupErrorLabel()
+        )
+    }
+    
+    private func setupSearchBar() -> [NSLayoutConstraint] {
         let bar = self.searchBar
         self.view.addSubview(bar)
         bar.translatesAutoresizingMaskIntoConstraints = false
@@ -18,15 +26,17 @@ extension RepositoriesViewController {
         bar.delegate = self
         
         let padding: CGFloat = 8
-        NSLayoutConstraint.activate([
+        let constraints = [
             self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: bar.topAnchor, constant: 0),
             bar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding),
             bar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding)
-        ])
+        ]
         bar.sizeToFit()
+        
+        return constraints
     }
     
-    func setupTableView() {
+    private func setupTableView() -> [NSLayoutConstraint] {
         let tableView = self.tableView
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -37,15 +47,16 @@ extension RepositoriesViewController {
         tableView.allowsSelection = false
         
         let padding: CGFloat = 8
-        NSLayoutConstraint.activate([
+        
+        return [
             tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 0),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding),
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -padding)
-        ])
+        ]
     }
     
-    func setupLoadingView() {
+    private func setupLoadingView() -> [NSLayoutConstraint] {
         let activityIndicator = self.loadingView
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(activityIndicator)
@@ -54,13 +65,13 @@ extension RepositoriesViewController {
         activityIndicator.color = .gray
         activityIndicator.hidesWhenStopped = true
         
-        NSLayoutConstraint.activate([
+        return [
             activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
+        ]
     }
     
-    func setupErrorLabel(centerXAnchorConstant: CGFloat = 0, centerYAnchorConstant: CGFloat = 0) {
+    private func setupErrorLabel(centerXAnchorConstant: CGFloat = 0, centerYAnchorConstant: CGFloat = 0) -> [NSLayoutConstraint] {
         let label = self.errorLabel
         label.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(label)
@@ -71,12 +82,12 @@ extension RepositoriesViewController {
         label.textAlignment = .center
             
         let padding: CGFloat = 8
-        NSLayoutConstraint.activate([
+        
+        return [
             label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: centerXAnchorConstant),
             label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: centerYAnchorConstant),
             label.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: padding),
             label.trailingAnchor.constraint(greaterThanOrEqualTo: self.view.trailingAnchor, constant: -padding)
-        ])
+        ]
     }
-
 }

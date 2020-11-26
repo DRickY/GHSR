@@ -8,7 +8,9 @@
 import Foundation
 
 public struct PaginationEntity<T: Codable>: Codable {
+    
     let totalItems: Int
+    
     let items: [T]
     
     var pageSize: Int { return 30 }

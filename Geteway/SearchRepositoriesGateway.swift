@@ -21,6 +21,7 @@ public class ApiSearchRepositoriesGatewayImpl : ApiBaseGateway, SearchRepositori
         let request = ExtendedApiRequest<PaginationEntity<RepositoryEntity>>.serachRepositories(searchText: text,
                                                                                                 prePage: limit,
                                                                                                 page: page)
+        print("request url: \(request.request.url!)")
         self.apiClient.execute(request: request, observer)
     }
 }

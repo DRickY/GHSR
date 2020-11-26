@@ -21,38 +21,42 @@ struct RepositoryConnector {
     }
     
     func stateToProps(state: AppState) -> Props {
-        let s = state.repository
-        
-        let commandInputText = Command<String?> { [dispatcher = self.dispatch] text in
-            dispatcher(RepositoryAction.searchRequest(text ?? ""))
-        }
+        let repoState = state.repository
         
         let commandSearchDidTap = Command<Void> { [dispatcher = self.dispatch] in
-            dispatcher(SearchEffect.newRequest(s.searchField ?? ""))
+            dispatcher(RepositoryAction.newSearch)
+            dispatcher(RepositoryEffect.newRequest(text: repoState.searchField ?? "", limit: repoState.pageSize, page: 1))
         }
         
+        let commandInputText = Command<String?> { [dispatcher = self.dispatch] input in
+            dispatcher(RepositoryAction.textField(input ?? ""))
+        }
+                
         let commandCleanFieldDidTap = Command<(String?)> { [dispatcher = self.dispatch] text in
-            dispatcher(RepositoryAction.searchRequest(""))
+            dispatcher(RepositoryAction.textField(""))
         }
         
-        let textField = Props.TextField(text: s.searchField,
+        let textField = Props.TextField(text: repoState.searchField,
                                         inputText: commandInputText,
                                         searchDidTap: commandSearchDidTap,
                                         cleanFieldDidTap: commandCleanFieldDidTap)
         
-        if s.errorMessage == "" {
-            return .error(s.errorMessage ?? "")
-        } else if s.isLoading {
+        if repoState.errorMessage == "" {
+            return .error(repoState.errorMessage ?? "")
+        } else if repoState.isLoading {
             return .loading
-        } else if s.searchField != nil || s.searchField != "" {
+        } else if repoState.searchField != nil || repoState.searchField != "" {
             
             let commandNewBatch = Command<Void> { [dispatcher = self.dispatch] in
-                print("BEGIN SEARCH NEW")
+                    dispatcher(RepositoryEffect.newRequest(text: repoState.searchField ?? "",
+                                                           limit: repoState.pageSize,
+                                                           page: repoState.currentPage + 1))
             }
             
-            let cells = s.repositories.map(RepositoryCell.Props.init)
+            let cells = repoState.repositories.map(RepositoryCell.Props.init)
             
-            let result = Props.Data(data: cells,
+            let result = Props.Data(pageSize: repoState.pageSize,
+                                    data: cells,
                                     textField: textField,
                                     newBatch: commandNewBatch)
 

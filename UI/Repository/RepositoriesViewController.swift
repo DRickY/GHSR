@@ -28,6 +28,7 @@ extension RepositoriesViewController {
         }
         
         struct Data {
+            let pageSize: Int
             let data: [RepositoryCell.Props]
             let textField: TextField
             let newBatch: Command<Void>
@@ -52,21 +53,20 @@ class RepositoriesViewController: UIViewController, RepositoriesView {
     }
     
     var deallocator: Deallocator?
+    
+    // MARK: - Init & Deinit
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        self.setupSearchBar()
-        self.setupTableView()
-        self.setupLoadingView()
-        self.setupErrorLabel()
+        self.activeConstraints()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.render2(props: self.props)
+        self.render(props: self.props)
     }
 }
 
@@ -76,33 +76,41 @@ fileprivate extension RepositoriesViewController {
         case .initialValue:
             self.searchBar.isHidden = true
             self.tableView.isHidden = true
+            self.errorLabel.isHidden = true
             self.loadingView.stopAnimating()
-            self.errorLabel.isHidden = true
         case .loading:
-            self.searchBar.isHidden = true
+//            self.searchBar.isHidden = true
             self.tableView.isHidden = true
-            self.loadingView.startAnimating()
             self.errorLabel.isHidden = true
-
-        case .error:
+            self.loadingView.startAnimating()
+            
+        case .error(let error):
             self.searchBar.isHidden = false
             self.tableView.isHidden = true
             self.loadingView.stopAnimating()
             self.errorLabel.isHidden = false
-//            self.errorLabel.text = errorData.description
+            self.errorLabel.text = error.description
             self.errorLabel.sizeToFit()
-//        case .hasNotText:
-//            self.searchBar.isHidden = false
-//            self.tableView.isHidden = true
-//            self.loadingView.stopAnimating()
-//            self.errorLabel.isHidden = true
-
-        case .repositories:
+            
+        case let .repositories(values, field):
             self.searchBar.isHidden = false
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
-            self.loadingView.stopAnimating()
             self.errorLabel.isHidden = true
+            self.loadingView.stopAnimating()
+            self.tableView.isHidden = values.data.isEmpty
+
+            self.tableView.reloadData()
+            
+            self.searchBar.text = field.text
+
+            if field.text.isNil || field.text == "" {
+                self.searchBar.resignFirstResponder()
+                self.searchBar.setShowsCancelButton(false, animated: true)
+                self.searchBar.showsSearchResultsButton = false
+            } else {
+                self.searchBar.becomeFirstResponder()
+                self.searchBar.setShowsCancelButton(!field.text.isNil, animated: true)
+                self.searchBar.showsSearchResultsButton = !field.text.isNil
+            }
         }
     }
 }
@@ -123,7 +131,9 @@ extension RepositoriesViewController: UITableViewDataSource {
             if case .repositories(let repos, _) = self.props,
                let data = repos.data[safe: indexPath.row]
             {
-                if indexPath.row >= repos.data.count - 1 {
+                if repos.data.count >= repos.pageSize &&
+                    indexPath.row >= repos.data.count - 1
+                {
                     repos.newBatch.execute()
                 }
                 

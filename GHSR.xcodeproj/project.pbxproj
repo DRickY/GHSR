@@ -29,7 +29,6 @@
 		9D55CB8F256BD31600303406 /* Store+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D55CB8E256BD31600303406 /* Store+Extension.swift */; };
 		9D55CB93256BD40E00303406 /* SearchMiddlewareEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D55CB92256BD40E00303406 /* SearchMiddlewareEffect.swift */; };
 		9D55CBB6256C256400303406 /* RepositoriesViewController+Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D55CBB5256C256400303406 /* RepositoriesViewController+Setupable.swift */; };
-		9D55CBB9256C25D700303406 /* RepositoriesViewController+Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D55CBB8256C25D700303406 /* RepositoriesViewController+Renderable.swift */; };
 		9D55CBBD256C276600303406 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D55CBBC256C276600303406 /* Optional+Extension.swift */; };
 		9D5F13F825644DB700C9A6D2 /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5F13F725644DB700C9A6D2 /* RepositoryCell.swift */; };
 		9D75193A256316EB00C63D10 /* SearchRepositoriesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D751939256316EB00C63D10 /* SearchRepositoriesGateway.swift */; };
@@ -38,7 +37,6 @@
 		9D77C29A25645C1B000E5E5B /* UINib+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77C29725645C1B000E5E5B /* UINib+Extension.swift */; };
 		9D77C29B25645C1B000E5E5B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77C29825645C1B000E5E5B /* UITableView+Extension.swift */; };
 		9D77C29C25645C1B000E5E5B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77C29925645C1B000E5E5B /* Functions.swift */; };
-		9D77C2A5256472FE000E5E5B /* RepositoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77C2A4256472FE000E5E5B /* RepositoryPresenter.swift */; };
 		9D8FCE202563300300F50BA5 /* AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FCE1F2563300300F50BA5 /* AnyError.swift */; };
 		9D8FCE232563321300F50BA5 /* ConcurrencyRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FCE222563321300F50BA5 /* ConcurrencyRequests.swift */; };
 		9D9A9647256304F600764B23 /* GitHubStaff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A9646256304F600764B23 /* GitHubStaff.swift */; };
@@ -102,7 +100,6 @@
 		9D55CB8E256BD31600303406 /* Store+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Extension.swift"; sourceTree = "<group>"; };
 		9D55CB92256BD40E00303406 /* SearchMiddlewareEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMiddlewareEffect.swift; sourceTree = "<group>"; };
 		9D55CBB5256C256400303406 /* RepositoriesViewController+Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoriesViewController+Setupable.swift"; sourceTree = "<group>"; };
-		9D55CBB8256C25D700303406 /* RepositoriesViewController+Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoriesViewController+Renderable.swift"; sourceTree = "<group>"; };
 		9D55CBBC256C276600303406 /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
 		9D5F13F725644DB700C9A6D2 /* RepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
 		9D751939256316EB00C63D10 /* SearchRepositoriesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoriesGateway.swift; sourceTree = "<group>"; };
@@ -111,7 +108,6 @@
 		9D77C29725645C1B000E5E5B /* UINib+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINib+Extension.swift"; sourceTree = "<group>"; };
 		9D77C29825645C1B000E5E5B /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		9D77C29925645C1B000E5E5B /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		9D77C2A4256472FE000E5E5B /* RepositoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryPresenter.swift; sourceTree = "<group>"; };
 		9D8FCE1F2563300300F50BA5 /* AnyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyError.swift; sourceTree = "<group>"; };
 		9D8FCE222563321300F50BA5 /* ConcurrencyRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrencyRequests.swift; sourceTree = "<group>"; };
 		9D9A9646256304F600764B23 /* GitHubStaff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStaff.swift; sourceTree = "<group>"; };
@@ -294,12 +290,10 @@
 		9DA3761E2564FC8700F742BB /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				9D77C2A4256472FE000E5E5B /* RepositoryPresenter.swift */,
 				9D55CB92256BD40E00303406 /* SearchMiddlewareEffect.swift */,
 				9DE18E8B256BC159008394F0 /* RepositoryState.swift */,
 				9D55CB8B256BD2E200303406 /* RepositoryConnector.swift */,
 				9DA946FB2562F42F004E7AD0 /* RepositoriesViewController.swift */,
-				9D55CBB8256C25D700303406 /* RepositoriesViewController+Renderable.swift */,
 				9D55CBB5256C256400303406 /* RepositoriesViewController+Setupable.swift */,
 				9D5F13F725644DB700C9A6D2 /* RepositoryCell.swift */,
 			);
@@ -351,8 +345,8 @@
 				9DA947102562F4DB004E7AD0 /* ApiClient.swift */,
 				9DA947112562F4DB004E7AD0 /* Requests.swift */,
 				9DA9471E2562F4DB004E7AD0 /* ApiBaseGateway.swift */,
-				9D9A9663256310A800764B23 /* RepositoriesPagination.swift */,
 				9D751939256316EB00C63D10 /* SearchRepositoriesGateway.swift */,
+				9D9A9663256310A800764B23 /* RepositoriesPagination.swift */,
 			);
 			path = Geteway;
 			sourceTree = "<group>";
@@ -543,8 +537,6 @@
 				9D55CBB6256C256400303406 /* RepositoriesViewController+Setupable.swift in Sources */,
 				9DA947272562F4DB004E7AD0 /* Interceptor.swift in Sources */,
 				9DA9473E2562F786004E7AD0 /* PreviewUIKit.swift in Sources */,
-				9D77C2A5256472FE000E5E5B /* RepositoryPresenter.swift in Sources */,
-				9D55CBB9256C25D700303406 /* RepositoriesViewController+Renderable.swift in Sources */,
 				9DA9472D2562F4DB004E7AD0 /* QueryField.swift in Sources */,
 				9D04E6B62568155C002E5F34 /* Store+Steroids.swift in Sources */,
 				9D04E6A92568155B002E5F34 /* Observable.swift in Sources */,
