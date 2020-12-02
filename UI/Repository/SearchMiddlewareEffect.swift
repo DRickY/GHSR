@@ -18,16 +18,6 @@ enum RepositoryEffect: Action {
 }
 
 extension RepositoryEffect {
-    
-    var pagination: RepositoriesPagination {
-        let host = Config.apiEndpoint
-        let apiClient: ApiClient = ApiClientImpl.defaultInstance(host: host)
-        let gateway: SearchRepositoriesGateway = ApiSearchRepositoriesGatewayImpl(apiClient)
-
-        let paginator: RepositoriesPagination = RepositoriesPaginationImp(searchGateway: gateway)
-        return paginator
-    }
-    
     var p: SearchRepositoriesGateway {
         let host = Config.apiEndpoint
         let apiClient: ApiClient = ApiClientImpl.defaultInstance(host: host)
@@ -47,22 +37,24 @@ extension RepositoryEffect {
         
         if case let .newRequest(text, lim, page) = self {
             NSLog("LOAD NEW Batch PAGINATION at page: \(page)")
-            self.p.searchRepositories(text: text,
-                                      page: page,
-                                      limit: lim) { (result) in
+            
+            let observer: (Result<PaginationEntity<RepositoryEntity>, ResponseErrorEntity>) -> Void = { (result) in
                 switch result {
                 case .success(let data):
                     print("data -")
                     dispatch(RepositoryAction.setCurrentPage(page))
                     dispatch(RepositoryAction.loading(isLoading: false))
-                    let action = RepositoryAction.loaded(data.items.sorted { $1.stars <= $0.stars })
-                    dispatch(action)
+                    dispatch(RepositoryAction.loaded(data.items.sorted { $1.stars <= $0.stars }))
 
                 case .failure(let error):
                     print("error \(error)")
                     dispatch(RepositoryAction.errorWhileLoading(error.localizedDescription))
                 }
             }
+            
+            self.p.searchRepositories(text: text,
+                                      page: page,
+                                      limit: lim, observer: observer)
         }
     }
 
